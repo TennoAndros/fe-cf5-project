@@ -30,8 +30,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="flex p-8 md:p-16 max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="flex p-8 md:p-16 max-w-4xl mx-auto rounded-lg shadow-2xl">
         <div className="flex flex-col items-center w-full">
           <Link
             to="/"
@@ -65,6 +65,7 @@ const SignIn = () => {
               gradientDuoTone="purpleToBlue"
               type="submit"
               disabled={loading}
+              pill
             >
               {loading ? (
                 <>

@@ -10,7 +10,7 @@ import {
 
 const FooterComp = () => {
   return (
-    <Footer container className="border border-t-8 border-gray">
+    <Footer container className="border border-t-2 border-gray-200">
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid w-full grid-cols-1 md:grid-cols-3 gap-8 mt-4">
           <div className="flex flex-col items-center md:items-start">
@@ -18,7 +18,7 @@ const FooterComp = () => {
               to="/"
               className="whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white"
             >
-              <h1 className="h-10 px-4 py-1 bg-gradient-to-r from-orange-400 via-purple-600 to-sky-500 rounded text-white">
+              <h1 className="h-10 px-4 py-1 bg-gradient-to-r from-orange-400 via-purple-600 to-sky-500 rounded-full text-white">
                 Book Talk
               </h1>
             </Link>

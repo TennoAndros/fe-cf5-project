@@ -60,8 +60,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="flex p-16 max-w-3xl mx-auto md:flex-row md:items-center gap-5 bg-white rounded shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="flex p-16 max-w-3xl mx-auto md:flex-row md:items-center gap-5 rounded shadow-2xl">
         {successMessage && (
           <div className="flex-1 items-center p-6">
             <h1 className="text-2xl text-[#0096c7] mb-4 text-center">
@@ -80,7 +80,7 @@ const SignUp = () => {
           <>
             <div className="flex-1">
               <Link to="/" className="font-bold dark:text-white text-4xl">
-                <span className="px-2 py-1 bg-gradient-to-r from-orange-400 via-purple-600 to-sky-500 rounded-lg text-white font-playfair">
+                <span className="px-4 py-1 bg-gradient-to-r from-orange-400 via-purple-600 to-sky-500 rounded-full text-white font-playfair">
                   Book Talk
                 </span>
               </Link>
@@ -158,6 +158,8 @@ const SignUp = () => {
                   gradientDuoTone="purpleToBlue"
                   type="submit"
                   disabled={loading}
+                  pill
+                  className="mt-2"
                 >
                   {loading ? (
                     <>
