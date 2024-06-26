@@ -76,7 +76,7 @@ const FooterComp = () => {
               </div>
               <div className="flex flex-row gap-2">
                 <Footer.Icon
-                  href="https://github.com/TennoAndros"
+                  href="https://www.instagram.com/"
                   icon={BsInstagram}
                 />
                 <Footer.Link
@@ -89,7 +89,7 @@ const FooterComp = () => {
               </div>
               <div className="flex flex-row gap-2">
                 <Footer.Icon
-                  href="https://github.com/TennoAndros"
+                  href="https://www.facebook.com"
                   icon={BsFacebook}
                 />
                 <Footer.Link
