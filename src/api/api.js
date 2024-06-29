@@ -29,30 +29,23 @@ export const fetchBookById = async (bookId) => {
   }
 };
 
-
 export const createBook = async (newBookObj) => {
   try {
-    const response = await booksApi.post(`/books`, newBookObj, {
-      withCredentials: true,
-    });
+    const response = await booksApi.post(`/books`, newBookObj);
     return response.data;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
 };
-
 
 export const removeBookById = async (bookId) => {
   try {
-    const response = await booksApi.delete(`/books/${bookId}`, {
-      withCredentials: true,
-    });
+    const response = await booksApi.delete(`/books/${bookId}`);
     return response.data;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
 };
-
 
 export const fetchReviewsByBookId = async ({ bookId, limit, p }) => {
   try {
@@ -65,15 +58,11 @@ export const fetchReviewsByBookId = async ({ bookId, limit, p }) => {
   }
 };
 
-
 export const createReviewByBookId = async ({ bookId, newReviewObj }) => {
   try {
     const response = await booksApi.post(
       `/books/${bookId}/reviews`,
-      newReviewObj,
-      {
-        withCredentials: true,
-      }
+      newReviewObj
     );
     return response.data;
   } catch (error) {
@@ -81,30 +70,23 @@ export const createReviewByBookId = async ({ bookId, newReviewObj }) => {
   }
 };
 
-
 export const updateReviewById = async ({ reviewId, reviewObj }) => {
   try {
-    const response = await booksApi.patch(`/reviews/${reviewId}`, reviewObj, {
-      withCredentials: true,
-    });
+    const response = await booksApi.patch(`/reviews/${reviewId}`, reviewObj);
     return response.data;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
 };
-
 
 export const removeReviewById = async (reviewId) => {
   try {
-    const response = await booksApi.delete(`/reviews/${reviewId}`, {
-      withCredentials: true,
-    });
+    const response = await booksApi.delete(`/reviews/${reviewId}`);
     return response.data;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
 };
-
 
 export const fetchGenres = async () => {
   try {
@@ -115,12 +97,9 @@ export const fetchGenres = async () => {
   }
 };
 
-
 export const createGenre = async (newGenreObj) => {
   try {
-    const response = await booksApi.post(`/genres`, newGenreObj, {
-      withCredentials: true,
-    });
+    const response = await booksApi.post(`/genres`, newGenreObj);
     return response.data;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
@@ -136,27 +115,31 @@ export const createUser = async (newUserObj) => {
   }
 };
 
-export const updateUser = async (username, updatedUser) => {
-  try {
-    const response = await booksApi.patch(`/users/${username}`, updatedUser, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(extractErrorMessage(error));
+export const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async ({ username, updatedUser }, { rejectWithValue }) => {
+    try {
+      const response = await booksApi.patch(`/users/${username}`, updatedUser);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(extractErrorMessage(error));
+    }
   }
-};
+);
 
-export const removeUserByUsername = async (username) => {
-  try {
-    const response = await booksApi.delete(`/users/${username}`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(extractErrorMessage(error));
+export const removeUserByUsername = createAsyncThunk(
+  "users/removeUserByUsername",
+  async (username, { rejectWithValue }) => {
+    console.log(username);
+    try {
+      const response = await booksApi.delete(`/users/${username}`);
+     
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(extractErrorMessage(error));
+    }
   }
-};
+);
 
 export const loginUser = createAsyncThunk(
   "users/loginUser",
@@ -170,11 +153,14 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const logoutUser = async () => {
-  try {
-    const response = await booksApi.post("/users/logout");
-    return response.data;
-  } catch (error) {
-    throw new Error(extractErrorMessage(error));
+export const logoutUser = createAsyncThunk(
+  "users/logoutUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await booksApi.post(`/users/logout`, null);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(extractErrorMessage(error));
+    }
   }
-};
+);

@@ -25,7 +25,7 @@ const SignIn = () => {
       await dispatch(loginUser(formData)).unwrap();
       navigate("/");
     } catch (err) {
-      console.error("Failed to login:", err);
+      console.error("Failed to Sign In:", err);
     }
   };
 
