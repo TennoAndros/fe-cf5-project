@@ -24,6 +24,7 @@ import { isFileSizeValid } from "../utils/validators";
 
 const Profile = () => {
   const { currentUser, error, loading } = useSelector((state) => state.user);
+  console.log(currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [imageFile, setImageFile] = useState(null);
@@ -58,8 +59,8 @@ const Profile = () => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setImageFileUploadProgress(progress.toFixed(0));
       },
-      () => {
-        setImageFileUploadError("File type must be an Image!");
+      (error) => {
+        setImageFileUploadError("Error uploading image: " + error.message);
         setImageFileUploadProgress(null);
         setImageFile(null);
         setImageFileUrl(currentUser.avatar_url);
@@ -97,12 +98,12 @@ const Profile = () => {
     event.preventDefault();
     setUpdateUserError(null);
     setUpdateUserSuccess(null);
-    if (Object.keys(formData).length === 0) {
+    if (Object.keys(formData).length === 0 && !imageFileUrl) {
       setUpdateUserError("No changes made");
       return;
     }
     if (imageFileUploading) {
-      setUpdateUserError("Please wait for image to upload");
+      setUpdateUserError("Please wait for the image to upload");
       return;
     }
     try {

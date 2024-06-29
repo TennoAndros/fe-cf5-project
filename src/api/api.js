@@ -120,7 +120,7 @@ export const updateUser = createAsyncThunk(
   async ({ username, updatedUser }, { rejectWithValue }) => {
     try {
       const response = await booksApi.patch(`/users/${username}`, updatedUser);
-      return response.data;
+      return response.data.user;
     } catch (error) {
       return rejectWithValue(extractErrorMessage(error));
     }
@@ -133,7 +133,7 @@ export const removeUserByUsername = createAsyncThunk(
     console.log(username);
     try {
       const response = await booksApi.delete(`/users/${username}`);
-     
+
       return response.data;
     } catch (error) {
       return rejectWithValue(extractErrorMessage(error));
