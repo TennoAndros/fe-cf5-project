@@ -14,6 +14,10 @@ Book-Talk was created as the final project for Coding Factory 5 at Athens Univer
 - [Installation Instructions](#installation-instructions)
 - [Technologies Used](#technologies-used)
 
+## Link to Deployed Version
+
+You can access the deployed version of cf5-fe-project [here](https://cf5-book-talk.netlify.app/).
+
 ## Link to Backend API Repository
 
 The backend API repository for this project can be found [here](https://github.com/TennoAndros/be-cf5-project).
@@ -49,6 +53,14 @@ The Book Talk App includes the following features and functionality:
 - **Authentication**: Users can sign up and sign in using cookies for authentication. This ensures a secure and personalized experience.
 
 - **Admin Privileges**: Only the Admin user has the ability to delete books from the platform.
+
+- **Admin User**: For testing purposes.
+
+- **Username**: Admin
+
+- **Password**: adminPassCode
+
+  Feel free to use this account to explore the application's functionalities.
 
 ## 🛠️ Installation Instructions
 
