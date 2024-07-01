@@ -2,16 +2,18 @@ import { Button, Select, Spinner, TextInput, Alert } from "flowbite-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { createBook, fetchGenres } from "../api/api";
+import { Link, useNavigate } from "react-router-dom";
+import { createBook, createGenre, fetchGenres } from "../api/api";
 import Error from "../components/Error";
 import "../App.css";
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [allGenres, setAllGenres] = useState([]);
+  const [postGenre, setPostGenre] = useState({});
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -34,9 +36,24 @@ const CreatePost = () => {
     setLoading(true);
     setError("");
     try {
-      await createBook(formData);
+      const existingGenre = allGenres.find(
+        (genre) => genre.genre === formData.genre
+      );
+
+      if (!existingGenre) {
+        await createGenre(postGenre);
+      }
+
+      await createBook({
+        ...formData,
+        genre: formData.genre || postGenre.genre,
+      });
+
       setLoading(false);
-      setSuccessMessage("Book posted!");
+      setSuccessMessage(
+        existingGenre ? "Book posted!" : "Book & new Genre posted!"
+      );
+      navigate(`/books`);
     } catch (err) {
       setError(err);
       setLoading(false);
@@ -79,11 +96,14 @@ const CreatePost = () => {
               }
             />
             <Select
-              required
-              onChange={(event) =>
-                setFormData({ ...formData, genre: event.target.value })
-              }
+              onChange={(event) => {
+                const selectedGenre = event.target.value;
+                if (selectedGenre !== "Select Genre") {
+                  setFormData({ ...formData, genre: selectedGenre });
+                }
+              }}
             >
+              <option>Select Genre</option>
               {allGenres.map((genre, index) => (
                 <option key={index} value={genre.genre}>
                   {genre.genre}
@@ -120,6 +140,14 @@ const CreatePost = () => {
               id="isbn"
               onChange={(event) =>
                 setFormData({ ...formData, isbn: event.target.value })
+              }
+            />
+            <TextInput
+              type="text"
+              placeholder="Post new genre"
+              id="createGenre"
+              onChange={(event) =>
+                setPostGenre({ ...postGenre, genre: event.target.value })
               }
             />
           </div>
