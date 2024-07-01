@@ -17,18 +17,18 @@
 }
 
 .banner .swiper-slide:nth-child(1n) {
-  background-image: url("src/assets/HP.png");
+  background-image: url("../assets/HP.png");
 }
 .banner .swiper-slide:nth-child(2n) {
-  background-image: url("src/assets/Cradle.png");
+  background-image: url("../assets/Cradle.png");
 }
 
 .banner .swiper-slide:nth-child(3n) {
-  background-image: url("src/assets/LittlePrince.png");
+  background-image: url("../assets/LittlePrince.png");
 }
 
 .banner .swiper-slide:nth-child(4n) {
-  background-image: url("src/assets/Coding.png");
+  background-image: url("../assets/Coding.png");
 }
 
 /* .banner .swiper-slide:nth-child(5n) {
