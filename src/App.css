@@ -11,6 +11,10 @@
   font-size: medium;
 }
 
+.ql-snow .ql-editor.ql-blank::before {
+  color: rgba(160, 174, 192, 0.5);
+}
+
 .truncate-text {
   overflow: hidden;
   text-overflow: ellipsis;
