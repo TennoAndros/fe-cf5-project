@@ -18,12 +18,17 @@ const ReviewCard = ({
   const dateString = review.created_at;
   const dateTime = new Date(dateString);
   const formattedDate = dateTime.toLocaleDateString("en-GB");
+
   useEffect(() => {
-    if (currentUser.username && review.username === currentUser.username) {
+    if (
+      currentUser &&
+      currentUser.username &&
+      review.username === currentUser.username
+    ) {
       setShowDeleteButton(true);
       setShowEditButton(true);
     }
-  }, [currentUser.username, review.username]);
+  }, [currentUser, review.username]);
 
   const renderRatingStars = (rating) => {
     const fullStars = Math.floor(rating);

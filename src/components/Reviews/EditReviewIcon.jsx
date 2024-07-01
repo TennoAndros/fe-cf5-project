@@ -8,6 +8,10 @@ const EditReviewIcon = ({ setShowEditReview, setReviewInEdit, review }) => {
         onClick={() => {
           setShowEditReview(true);
           setReviewInEdit(review);
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
         }}
         aria-label="Edit Review"
       >

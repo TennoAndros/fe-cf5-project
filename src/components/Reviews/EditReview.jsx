@@ -28,10 +28,6 @@ const EditReview = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log("UPDATE", {
-        reviewId: reviewInEdit.review_id,
-        postNewReview,
-      });
       setLoading(true);
       await updateReviewById({
         reviewId: reviewInEdit.review_id,
@@ -78,6 +74,7 @@ const EditReview = ({
             aria-label="Review Author"
           />
         </div>
+        <div className="font-semibold"><u>Edit Review</u></div>
         <div className="flex items-center mt-4 lg:mt-0">
           <span className="text-lg mr-2">Rating:</span>
           <div className="flex items-center">{renderRatingStars()}</div>
