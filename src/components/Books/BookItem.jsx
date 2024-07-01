@@ -25,6 +25,7 @@ const BookItem = () => {
         const bookData = await fetchBookById(book_id);
         setBook(bookData);
         setIsLoading(false);
+        window.scrollTo(0, 0);
       } catch (err) {
         setError(err);
         setIsLoading(false);
