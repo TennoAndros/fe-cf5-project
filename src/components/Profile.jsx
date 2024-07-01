@@ -24,7 +24,6 @@ import { isFileSizeValid } from "../utils/validators";
 
 const Profile = () => {
   const { currentUser, error, loading } = useSelector((state) => state.user);
-  console.log(currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [imageFile, setImageFile] = useState(null);
@@ -284,7 +283,7 @@ const Profile = () => {
         <ModalBody>
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
-            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+            <h3 className="mb-5 font-roboto text-lg text-gray-500 dark:text-gray-400">
               Are you sure you want to delete your account?
             </h3>
             <div className="flex justify-center gap-4">

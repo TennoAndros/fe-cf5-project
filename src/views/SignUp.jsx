@@ -4,6 +4,7 @@ import { createUser } from "../api/api";
 import { isEmailValid, isPasswordStrong } from "../utils/validators";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -64,7 +65,7 @@ const SignUp = () => {
       <div className="flex p-16 max-w-3xl mx-auto md:flex-row md:items-center gap-5 rounded shadow-2xl">
         {successMessage && (
           <div className="flex-1 items-center p-6">
-            <h1 className="text-2xl text-[#0096c7] mb-4 text-center">
+            <h1 className="text-2xl mb-4 text-center">
               {successMessage}
             </h1>
             <Link to="/sign-in" className="text-[#f48c06] text-center">

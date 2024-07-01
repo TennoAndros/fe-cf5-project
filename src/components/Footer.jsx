@@ -23,18 +23,6 @@ const FooterComp = () => {
               </h1>
             </Link>
           </div>
-          {/* <div>
-            <Footer.Title title="About" />
-            <Footer.LinkGroup col>
-              <div className="text-balance">
-                This project was created as a final project for the Coding
-                Factory 5 at AUEB, demonstrating the skills I obtained. It
-                features a REST API with CRUD operations, JWT authentication,
-                and password hashing using bcrypt. The frontend is built with
-                React, Vite, TailwindCSS, Axios, and Flowbite-React.
-              </div>
-            </Footer.LinkGroup>
-          </div> */}
           <div>
             <Footer.Title title="Follow Me" />
             <Footer.LinkGroup col>

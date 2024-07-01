@@ -22,3 +22,8 @@ body {
   font-family: "Roboto Slab", sans-serif;
 }
 
+.text-gradient {
+  background: linear-gradient(to right, orange, rgb(119, 18, 167), rgb(54, 125, 207));
+  -webkit-background-clip: text;
+  color: transparent;
+}

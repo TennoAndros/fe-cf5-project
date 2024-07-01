@@ -1,0 +1,56 @@
+.banner .swiper {
+  width: 240px;
+  height: 340px;
+}
+
+.banner .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner .swiper-slide:nth-child(1n) {
+  background-image: url("src/assets/HP.png");
+}
+.banner .swiper-slide:nth-child(2n) {
+  background-image: url("src/assets/Cradle.png");
+}
+
+.banner .swiper-slide:nth-child(3n) {
+  background-image: url("src/assets/LittlePrince.png");
+}
+
+.banner .swiper-slide:nth-child(4n) {
+  background-image: url("src/assets/Coding.png");
+}
+
+/* .banner .swiper-slide:nth-child(5n) {
+  background-color: rgb(118, 163, 12);
+}
+
+.banner .swiper-slide:nth-child(6n) {
+  background-color: rgb(180, 10, 47);
+}
+
+.banner .swiper-slide:nth-child(7n) {
+  background-color: rgb(35, 99, 19);
+}
+
+.banner .swiper-slide:nth-child(8n) {
+  background-color: rgb(0, 68, 255);
+}
+
+.banner .swiper-slide:nth-child(9n) {
+  background-color: rgb(218, 12, 218);
+}
+
+.banner .swiper-slide:nth-child(10n) {
+  background-color: rgb(54, 94, 77);
+} */

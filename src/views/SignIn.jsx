@@ -37,7 +37,7 @@ const SignIn = () => {
             to="/"
             className="font-bold dark:text-orange-400 text-4xl mb-10"
           >
-            <span className="text-sky-500">Sign In</span>
+            <span>Sign In</span>
           </Link>
           <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit}>
             <div className="w-full">

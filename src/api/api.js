@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import booksApi from "../utils/axios";
 
-const extractErrorMessage = (err) => {
+export const extractErrorMessage = (err) => {
   if (err.response && err.response.data && err.response.data.msg) {
     return err.response.data.msg;
   } else {
@@ -9,12 +9,15 @@ const extractErrorMessage = (err) => {
   }
 };
 
-export const fetchBooks = async ({ sortBy, order, genre, limit = 0, p }) => {
+export const fetchBooks = async ({ sortBy, order, genre, limit, p }) => {
   try {
     const response = await booksApi.get(`/books`, {
       params: { sort_by: sortBy, order, genre, limit, p },
     });
-    return response.data;
+    return {
+      books: response.data.books,
+      total_count: response.data.total_count,
+    };
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -23,7 +26,7 @@ export const fetchBooks = async ({ sortBy, order, genre, limit = 0, p }) => {
 export const fetchBookById = async (bookId) => {
   try {
     const response = await booksApi.get(`/books/${bookId}`);
-    return response.data;
+    return response.data.book;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -32,7 +35,7 @@ export const fetchBookById = async (bookId) => {
 export const createBook = async (newBookObj) => {
   try {
     const response = await booksApi.post(`/books`, newBookObj);
-    return response.data;
+    return response.data.book;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -41,7 +44,7 @@ export const createBook = async (newBookObj) => {
 export const removeBookById = async (bookId) => {
   try {
     const response = await booksApi.delete(`/books/${bookId}`);
-    return response.data;
+    return response.data.book;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -52,19 +55,25 @@ export const fetchReviewsByBookId = async ({ bookId, limit, p }) => {
     const response = await booksApi.get(`/books/${bookId}/reviews`, {
       params: { limit, p },
     });
-    return response.data;
+    return {
+      reviews: response.data.reviews,
+      total_count: response.data.total_count,
+    };
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
 };
 
-export const createReviewByBookId = async ({ bookId, newReviewObj }) => {
+export const createReviewByBookId = async ({
+  bookId,
+  postNewReview: { body, rating },
+}) => {
   try {
-    const response = await booksApi.post(
-      `/books/${bookId}/reviews`,
-      newReviewObj
-    );
-    return response.data;
+    const response = await booksApi.post(`/books/${bookId}/reviews`, {
+      body,
+      rating,
+    });
+    return response.data.newReview;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -73,7 +82,7 @@ export const createReviewByBookId = async ({ bookId, newReviewObj }) => {
 export const updateReviewById = async ({ reviewId, reviewObj }) => {
   try {
     const response = await booksApi.patch(`/reviews/${reviewId}`, reviewObj);
-    return response.data;
+    return response.data.review;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -82,7 +91,7 @@ export const updateReviewById = async ({ reviewId, reviewObj }) => {
 export const removeReviewById = async (reviewId) => {
   try {
     const response = await booksApi.delete(`/reviews/${reviewId}`);
-    return response.data;
+    return response.data.review;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -91,7 +100,7 @@ export const removeReviewById = async (reviewId) => {
 export const fetchGenres = async () => {
   try {
     const response = await booksApi.get("/genres");
-    return response.data;
+    return response.data.genres;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -100,7 +109,7 @@ export const fetchGenres = async () => {
 export const createGenre = async (newGenreObj) => {
   try {
     const response = await booksApi.post(`/genres`, newGenreObj);
-    return response.data;
+    return response.data.genre;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -109,7 +118,7 @@ export const createGenre = async (newGenreObj) => {
 export const createUser = async (newUserObj) => {
   try {
     const response = await booksApi.post(`/users`, newUserObj);
-    return response.data;
+    return response.data.user;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }
@@ -130,7 +139,6 @@ export const updateUser = createAsyncThunk(
 export const removeUserByUsername = createAsyncThunk(
   "users/removeUserByUsername",
   async (username, { rejectWithValue }) => {
-    console.log(username);
     try {
       const response = await booksApi.delete(`/users/${username}`);
 

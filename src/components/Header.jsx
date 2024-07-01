@@ -1,16 +1,27 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.jpeg";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
+import { logoutUser } from "../api/api";
 
 const Header = () => {
   const path = useLocation().pathname;
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignout = async () => {
+    try {
+      await dispatch(logoutUser()).unwrap();
+      navigate("/");
+    } catch (err) {
+      console.error("Failed to Sign Out:", err);
+    }
+  };
 
   return (
     <Navbar className="border-b-2 flex flex-col items-center sm:flex-row sm:justify-between text-center py-3">
@@ -40,7 +51,7 @@ const Header = () => {
       <Button className="w-12 h-9 lg:hidden" color="gray" pill>
         <AiOutlineSearch />
       </Button>
-      <div className="flex gap-2 md:order-2">
+      <div className="flex gap-4 md:order-2">
         <Button
           className="w-12 h-10 hidden sm:inline"
           color="gray"
@@ -53,7 +64,7 @@ const Header = () => {
           <Dropdown
             arrowIcon={false}
             inline
-            label={<Avatar alt="user image" img={currentUser.avatar_url} />}
+            label={<Avatar alt="user image" img={currentUser.avatar_url} rounded/>}
           >
             <Dropdown.Header>
               <span className="block font-medium text-sm">
@@ -64,7 +75,7 @@ const Header = () => {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>Sign Out</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to="/sign-in">
